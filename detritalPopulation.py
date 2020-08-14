@@ -174,7 +174,7 @@ class population:
         '''
         
         #Load in the excel file using pandas
-        xlFile = pd.read_excel(open(excelFileName,'rb'),sheetname = excelSheetName)
+        xlFile = pd.read_excel(open(excelFileName,'rb'),sheet_name = excelSheetName)
         
         #If requested, take a subset of the samples
         useSampleSubset = False
