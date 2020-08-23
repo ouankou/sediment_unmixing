@@ -31,7 +31,9 @@ from matplotlib import patches
 from detritalPopulation import population
 import os
 
-RESULT_FOLDER = 'TestData/'
+RESULT_FOLDER = 'Output'
+if not os.path.exists(RESULT_FOLDER):
+    os.makedirs(RESULT_FOLDER)
 
 #==============================================================================
 # Create helper functinos
@@ -318,7 +320,8 @@ class MixtureModel:
         bestFit = self.mixingCoeffs[0]
         tax.scatter([(round(bestFit[0],3)*100.0,round(bestFit[1],3)*100.0,round(bestFit[2],3)*100.0)], marker='o', lw=3, color='black')
         # Save the current figure to a temporary PDF file
-        tax.savefig(RESULT_FOLDER + 'temp.pdf')
+        tax.savefig(os.path.join(RESULT_FOLDER, 'temp.pdf'))
+        tax.close()
     
         return tax
 
@@ -342,7 +345,8 @@ class MixtureModel:
         plt.xlabel('Proportion of '+self.parentNames[0]+' (%)',fontsize = 14)
         plt.ylabel('Func. value',fontsize = 12)
         # Save the current figure to a temporary PDF file
-        plt.savefig(RESULT_FOLDER + 'temp.pdf')
+        plt.savefig(os.path.join(RESULT_FOLDER, 'temp.pdf'))
+        plt.close()
     
     def _plotMixturesYAxis_(self,numMixturesToPlot = 10, colormap = 'Accent'):
         '''
@@ -380,7 +384,8 @@ class MixtureModel:
         plt.ylabel(self.objFunc.func_name,fontsize = 12)
         plt.legend(loc='upper center')
         # Save the current figure to a temporary PDF file
-        plt.savefig(RESULT_FOLDER + 'temp.pdf')
+        plt.savefig(os.path.join(RESULT_FOLDER, 'temp.pdf'))
+        plt.close()
         
     def _plotCollapsedMixturesSingleAxis(self,colormap = 'Accent'):
         
@@ -532,8 +537,8 @@ class mixtureModelSet:
         for i in range(self.nDaughters):
             self.mixModels[i].plot(plottingStyle,**kwargs)
             plt.title(self.daughterNames[i])
-            if os.path.exists(RESULT_FOLDER + 'temp.pdf'):
-                os.rename(RESULT_FOLDER + 'temp.pdf', RESULT_FOLDER + self.daughterNames[i] + '.pdf')
+            if os.path.exists(os.path.join(RESULT_FOLDER, 'temp.pdf')):
+                os.rename(os.path.join(RESULT_FOLDER, 'temp.pdf'), os.path.join(RESULT_FOLDER, self.daughterNames[i] + '.pdf'))
 
     def plotSingleMixture(self,daughterName,plottingStyle = 'mixture value',**kwargs):
         '''

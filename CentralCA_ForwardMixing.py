@@ -25,6 +25,10 @@ from matplotlib import pyplot as plt
 from matplotlib import cm
 import os
 
+RESULT_FOLDER = 'Output'
+if not os.path.exists(RESULT_FOLDER):
+    os.makedirs(RESULT_FOLDER)
+
 #==============================================================================
 # Define the path to the data and the parameters for the mixture modeling
 #==============================================================================
@@ -33,7 +37,7 @@ import os
 filePath = os.path.join('TestData','Sickmann_etal_2016_Data.xlsx')
 
 #Define the path to output the summary data
-outfile = os.path.join('TestData','CA_mixingResults.txt')
+outfile = os.path.join(RESULT_FOLDER, 'CA_mixingResults.txt')
 
 #Name of the sheet that contains the data
 excelSheet = 'U_Pb_Data'
