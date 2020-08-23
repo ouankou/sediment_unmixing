@@ -1,2 +1,14 @@
-# sediment_unmixing
-Repository of code published in Sharman and Johnstone (2017): Earth and Planetary Science Letters
+# Prerequisite
+
+```bash
+virtualenv -p python3 venv
+source venv/bin/activate
+pip -r requirements.txt
+```
+
+
+# Run
+
+```bash
+python CentralCA_ForwardMixing.py
+```
