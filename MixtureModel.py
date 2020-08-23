@@ -31,6 +31,8 @@ from matplotlib import patches
 from detritalPopulation import population
 import os
 
+RESULT_FOLDER = 'TestData/'
+
 #==============================================================================
 # Create helper functinos
 #==============================================================================
@@ -316,7 +318,7 @@ class MixtureModel:
         bestFit = self.mixingCoeffs[0]
         tax.scatter([(round(bestFit[0],3)*100.0,round(bestFit[1],3)*100.0,round(bestFit[2],3)*100.0)], marker='o', lw=3, color='black')
         # Save the current figure to a temporary PDF file
-        tax.savefig('temp.pdf')
+        tax.savefig(RESULT_FOLDER + 'temp.pdf')
     
         return tax
 
@@ -340,7 +342,7 @@ class MixtureModel:
         plt.xlabel('Proportion of '+self.parentNames[0]+' (%)',fontsize = 14)
         plt.ylabel('Func. value',fontsize = 12)
         # Save the current figure to a temporary PDF file
-        plt.savefig('temp.pdf')
+        plt.savefig(RESULT_FOLDER + 'temp.pdf')
     
     def _plotMixturesYAxis_(self,numMixturesToPlot = 10, colormap = 'Accent'):
         '''
@@ -378,7 +380,7 @@ class MixtureModel:
         plt.ylabel(self.objFunc.func_name,fontsize = 12)
         plt.legend(loc='upper center')
         # Save the current figure to a temporary PDF file
-        plt.savefig('temp.pdf')
+        plt.savefig(RESULT_FOLDER + 'temp.pdf')
         
     def _plotCollapsedMixturesSingleAxis(self,colormap = 'Accent'):
         
@@ -530,8 +532,8 @@ class mixtureModelSet:
         for i in range(self.nDaughters):
             self.mixModels[i].plot(plottingStyle,**kwargs)
             plt.title(self.daughterNames[i])
-            if os.path.exists("temp.pdf"):
-                os.rename('temp.pdf', self.daughterNames[i] + '.pdf')
+            if os.path.exists(RESULT_FOLDER + 'temp.pdf'):
+                os.rename(RESULT_FOLDER + 'temp.pdf', RESULT_FOLDER + self.daughterNames[i] + '.pdf')
 
     def plotSingleMixture(self,daughterName,plottingStyle = 'mixture value',**kwargs):
         '''
